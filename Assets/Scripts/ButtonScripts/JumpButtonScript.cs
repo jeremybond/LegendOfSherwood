@@ -10,10 +10,22 @@ public class JumpButtonScript : MonoBehaviour {
 	{
 		guiTexture.texture = button1;
 	}
+	void OnDrawGizmosSelected() {
+		//Vector3 p = camera.ScreenToWorldPoint(new Vector3(100, 100, camera.nearClipPlane));
+		//Gizmos.color = Color.yellow;
+		//Gizmos.DrawSphere(p, 0.1F);
+	}
 	void Update()
 	{
 		foreach (Touch touch in Input.touches)
 		{
+			if(touch.position.y <= ((Screen.width / 4)*3))
+			{
+				if(MovePlayerObject.standingOnGround)
+				{
+					MovePlayerObject.jump = true;
+				}
+			}
 			if (guiTexture.HitTest(touch.position) && touch.phase != TouchPhase.Ended)
 			{
 				guiTexture.texture = button2;
@@ -36,3 +48,10 @@ public class JumpButtonScript : MonoBehaviour {
 		}
 	}
 }
+
+//links = 6.2
+//rechts = 715.2
+//onder = 8.0
+//boven = 473.4
+
+
