@@ -1,8 +1,17 @@
 ﻿<Properties>
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ButtonScripts\LeftEnRightButton.cs">
     <Files>
       <File FileName="Assets\Scripts\ButtonScripts\LeftEnRightButton.cs" Line="36" Column="13" />
+=======
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ButtonScripts\JumpButtonScript.cs">
+    <Files>
+      <File FileName="Assets\Scripts\ButtonScripts\LeftEnRightButton.cs" Line="4" Column="1" />
+      <File FileName="Assets\Scripts\MovePlayerObject.cs" Line="4" Column="1" />
+      <File FileName="Assets\Scripts\ButtonScripts\JumpButtonScript.cs" Line="27" Column="6" />
+>>>>>>> origin/Jeremaya
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

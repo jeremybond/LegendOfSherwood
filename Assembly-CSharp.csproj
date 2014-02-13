@@ -62,6 +62,8 @@
      <Compile Include="Assets\Scripts\MovePlayerObject.cs" />
      <Compile Include="Assets\Scripts\StaticVariables.cs" />
      <Compile Include="Assets\Scripts\Swipe.cs" />
+     <Compile Include="Assets\Tilemap\Levels.cs" />
+     <Compile Include="Assets\Tilemap\TileScript.cs" />
      <Compile Include="Assets\movement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
