@@ -16,7 +16,7 @@ public class MovePlayerObject : MonoBehaviour {
 			transform.position += new Vector3(-0.5f,0,0);
 		}
 		if(jump){
-			rigidbody.AddForce(0, 5, 0);
+			rigidbody.AddForce(0, 150, 0);
 		}
 		Deactivate();
 	}

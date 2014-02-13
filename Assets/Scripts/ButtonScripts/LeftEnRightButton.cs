@@ -1,40 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LeftEnRightButton : MonoBehaviour {
-	
-	public Texture2D button1;
-	public Texture2D button2;
+public class LeftEnRightButton : MonoBehaviour 
+{
 	public bool trueIsLeftFalseIsRight;
-	
-	void Start()
-	{
-		guiTexture.texture = button1;
-	}
+
 	void Update()
 	{
 		foreach (Touch touch in Input.touches)
 		{
-			if (guiTexture.HitTest(touch.position) && touch.phase != TouchPhase.Ended)
+			if(touch.position.y < (Screen.height/4))
 			{
-				guiTexture.texture = button2;
-				if(trueIsLeftFalseIsRight)
+				if (touch.position.x < Screen.width/2 - 20 )
 				{
 					MovePlayerObject.leftMovement = true;
-				}else{
+				}
+				else if (touch.position.x > Screen.width/2 - 20) 
+				{
 					MovePlayerObject.rightMovement = true;
 				}
-				if(!guiTexture.HitTest(touch.position))
-				{
-					guiTexture.texture = button1;
-				}
-			}
-			else if (guiTexture.HitTest(touch.position) && touch.phase == TouchPhase.Ended)
-			{
-				guiTexture.texture = button1;
-			}else if(!guiTexture.HitTest(touch.position))
-			{
-				guiTexture.texture = button1;
 			}
 		}
 	}

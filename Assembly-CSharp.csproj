@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{68F056E6-C6F7-2E1F-0BCF-31384EFB3F20}</ProjectGuid>
+	<ProjectGuid>{88FA5B52-EE45-AFFC-73F0-0A36DD975E02}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -61,8 +61,8 @@
      <Compile Include="Assets\Scripts\CameraRayCast.cs" />
      <Compile Include="Assets\Scripts\MovePlayerObject.cs" />
      <Compile Include="Assets\Scripts\StaticVariables.cs" />
+     <Compile Include="Assets\Scripts\Swipe.cs" />
      <Compile Include="Assets\movement.cs" />
-     <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

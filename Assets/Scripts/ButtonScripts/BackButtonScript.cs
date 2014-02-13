@@ -8,6 +8,7 @@ public class BackButtonScript : MonoBehaviour {
 	public GameObject guiObject;
 	public bool fromCredits;
 
+
 	void Start () 
 	{
 		guiTexture.texture = button1;	
@@ -27,13 +28,18 @@ public class BackButtonScript : MonoBehaviour {
 				if(fromCredits)
 				{
 					GuiMovementScript.backToMenuFromCredits = true;
-				}else{
+				}
+				else
+				{
 					GuiMovementScript.backToMenuFromLevels = true;
 				}
-			}else if(!guiTexture.HitTest(touch.position))
+			}
+			
+			else if(!guiTexture.HitTest(touch.position))
 			{
 				guiTexture.texture = button1;
 			}
 		}
+
 	}
 }
