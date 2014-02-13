@@ -16,11 +16,8 @@ public class MovePlayerObject : MonoBehaviour {
 			transform.position += new Vector3(-0.5f,0,0);
 		}
 		if(jump){
-<<<<<<< HEAD
 			rigidbody.AddForce(0, 150, 0);
-=======
 			rigidbody.AddForce(Vector3.up * 2500 * Time.deltaTime);
->>>>>>> origin/Jeremaya
 		}
 		Deactivate();
 	}
