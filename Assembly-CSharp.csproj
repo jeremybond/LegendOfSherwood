@@ -55,15 +55,15 @@
      <Compile Include="Assets\Scripts\ButtonScripts\GoStartScreen.cs" />
      <Compile Include="Assets\Scripts\ButtonScripts\GoWinScreen.cs" />
      <Compile Include="Assets\Scripts\ButtonScripts\GuiMovementScript.cs" />
-     <Compile Include="Assets\Scripts\ButtonScripts\JumpButtonScript.cs" />
-     <Compile Include="Assets\Scripts\ButtonScripts\LeftEnRightButton.cs" />
      <Compile Include="Assets\Scripts\ButtonScripts\StartButtonScript.cs" />
      <Compile Include="Assets\Scripts\CameraRayCast.cs" />
+     <Compile Include="Assets\Scripts\JumpButtonScript.cs" />
+     <Compile Include="Assets\Scripts\LeftEnRightButton.cs" />
      <Compile Include="Assets\Scripts\MovePlayerObject.cs" />
      <Compile Include="Assets\Scripts\StaticVariables.cs" />
      <Compile Include="Assets\Scripts\Swipe.cs" />
-     <Compile Include="Assets\Tilemap\Levels.cs" />
-     <Compile Include="Assets\Tilemap\TileScript.cs" />
+     <Compile Include="Assets\Scripts\Tilemap\Levels.cs" />
+     <Compile Include="Assets\Scripts\Tilemap\TileScript.cs" />
      <Compile Include="Assets\movement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

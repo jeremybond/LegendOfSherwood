@@ -11,23 +11,23 @@ public class MovePlayerObject : MonoBehaviour {
 	{
 		if(rightMovement){
 			transform.position += new Vector3(0.5f,0,0);
-		}
-		if(leftMovement){
+		}else if(leftMovement){
 			transform.position += new Vector3(-0.5f,0,0);
 		}
-		if(jump){
-			rigidbody.AddForce(0, 150, 0);
-			rigidbody.AddForce(Vector3.up * 2500 * Time.deltaTime);
+		if(jump && standingOnGround){
+			//rigidbody.AddForce(0, 55, 0);
+			rigidbody.AddRelativeForce(Vector3.up * 2500 * (Time.deltaTime ));
+			jump = false;
+			standingOnGround = false;
 		}
 		Deactivate();
 	}
 	void Deactivate(){
 		rightMovement = false;
 		leftMovement = false;
-		jump = false;
 	}
 	void OnCollisionEnter(Collision col){
-		if(col.collider.name == "Ground")
+		if(col.collider.tag == "Ground")
 		{
 			standingOnGround = true;
 		}
