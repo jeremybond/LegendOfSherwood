@@ -60,11 +60,8 @@
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\Coins.cs" />
      <Compile Include="Assets\Scripts\Player\LeftEnRightButton.cs" />
-     <Compile Include="Assets\Scripts\Player\MovePlayerObject.cs" />
      <Compile Include="Assets\Scripts\Shoot2.cs" />
      <Compile Include="Assets\Scripts\StaticVariables.cs" />
-     <Compile Include="Assets\Scripts\Tilemap\Levels.cs" />
-     <Compile Include="Assets\Scripts\Tilemap\TileScript.cs" />
      <Compile Include="Assets\Scripts\shoot.cs" />
      <Compile Include="Assets\movement.cs" />
   </ItemGroup>

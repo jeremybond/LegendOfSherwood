@@ -1,8 +1,18 @@
 ﻿<Properties>
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CameraMovement.cs">
     <Files>
       <File FileName="Assets\Scripts\CameraMovement.cs" Line="18" Column="1" />
+=======
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CameraMovement.cs">
+    <Files>
+      <File FileName="Assets\Scripts\Player\MovePlayerObject.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Player\MovePlayerObject.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CameraMovement.cs" Line="14" Column="62" />
+      <File FileName="Assets\Scripts\Player\LeftEnRightButton.cs" Line="1" Column="1" />
+>>>>>>> b50a9a225459d084c12fdb099b9c388c1e134b27
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
