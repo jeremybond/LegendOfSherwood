@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\ButtonScripts\GuiMovementScript.cs" />
      <Compile Include="Assets\Scripts\ButtonScripts\JumpButtonScript.cs" />
      <Compile Include="Assets\Scripts\ButtonScripts\StartButtonScript.cs" />
+     <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\Coins.cs" />
      <Compile Include="Assets\Scripts\Player\LeftEnRightButton.cs" />
      <Compile Include="Assets\Scripts\Player\MovePlayerObject.cs" />

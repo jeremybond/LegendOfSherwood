@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MovePlayerObject : MonoBehaviour 
-{
+public class MovePlayerObject : MonoBehaviour {
 	public static bool rightMovement = false;
 	public static bool leftMovement = false;
 	public static bool jump = false;
