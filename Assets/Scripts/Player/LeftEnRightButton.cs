@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LeftEnRightButton : MonoBehaviour {
+public class LeftEnRightButton : MonoBehaviour 
+{
 	public static bool jumpCapability = true;
 
 
@@ -22,8 +23,10 @@ public class LeftEnRightButton : MonoBehaviour {
 				{
 					MovePlayerObject.jump = true;
 				}
+			}else{
+				MovePlayerObject.shootingBool = true;
 			}
 		}
-	}
 	
+	}
 }

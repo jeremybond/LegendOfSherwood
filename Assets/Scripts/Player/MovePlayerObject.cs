@@ -6,6 +6,7 @@ public class MovePlayerObject : MonoBehaviour {
 	public static bool leftMovement = false;
 	public static bool jump = false;
 	public static bool standingOnGround = true;
+	public static bool shootingBool = false;
 
 	void Update()
 	{
@@ -24,6 +25,23 @@ public class MovePlayerObject : MonoBehaviour {
 			standingOnGround = false;
 		}
 		Deactivate();
+		//moet nog aangepast worden!!!!!!
+		if(shootingBool)
+		{
+			shootingBool = false;
+			StartCoroutine(Shoot());
+		}
+	
+	}
+	public IEnumerator  Shoot()
+	{
+		if (Input.touchCount==1)
+		{
+			Vector3 position = new Vector3(transform.position.x,(transform.position.y + (transform.localScale.y/2)),0);
+			GameObject newArrow = Instantiate(Resources.Load("PreFabs/Arrow"),transform.position, Quaternion.identity) as GameObject;
+		}
+		Vector3 touchPosition=new Vector3();
+		yield return null;
 	}
 	void Deactivate()
 	{
