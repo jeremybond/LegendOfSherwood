@@ -16,7 +16,8 @@ public class CameraMovement : MonoBehaviour {
 		float temperrarilyVariableY = playerPos.y - 1f;
 		transform.position = new Vector3((temperrarilyVariableX * PosXStraightener),temperrarilyVariableY / 2.2f,transform.position.z);
 	}
-	void updatePlayerPos(){
+	void updatePlayerPos()
+	{
 		playerPos = playerObject.transform.position;
 	}
 }

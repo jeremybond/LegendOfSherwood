@@ -23,7 +23,8 @@ public class LeftEnRightButton : MonoBehaviour
 				{
 					MovePlayerObject.jump = true;
 				}
-			}else{
+			}else
+			{
 				MovePlayerObject.shootingBool = true;
 			}
 		}
