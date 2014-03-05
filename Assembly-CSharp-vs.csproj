@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\Coins.cs" />
      <Compile Include="Assets\Scripts\Player\LeftEnRightButton.cs" />
      <Compile Include="Assets\Scripts\Player\MovePlayerObject.cs" />
+     <Compile Include="Assets\Scripts\Player\shooting.cs" />
      <Compile Include="Assets\Scripts\Shoot2.cs" />
      <Compile Include="Assets\Scripts\StaticVariables.cs" />
      <Compile Include="Assets\Scripts\Tilemap\Levels.cs" />
