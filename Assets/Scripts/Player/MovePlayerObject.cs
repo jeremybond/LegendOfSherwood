@@ -46,7 +46,7 @@ public class MovePlayerObject : MonoBehaviour
 			GameObject newArrow = Instantiate(Resources.Load("PreFabs/Arrow"),transform.position, Quaternion.identity) as GameObject;
 		}
 
-		if (touch.position
+
 
 		Vector3 touchPosition=new Vector3();
 

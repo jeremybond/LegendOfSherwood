@@ -1,17 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CameraMovement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player\shooting.cs">
     <Files>
-<<<<<<< HEAD
-      <File FileName="Assets\Scripts\Player\MovePlayerObject.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CameraMovement.cs" Line="9" Column="11" />
-      <File FileName="Assets\Scripts\Shoot2.cs" Line="1" Column="1" />
-=======
-      <File FileName="Assets\Scripts\Player\MovePlayerObject.cs" Line="49" Column="21" />
-      <File FileName="Assets\Scripts\Player\LeftEnRightButton.cs" Line="13" Column="4" />
-      <File FileName="Assets\Scripts\CameraMovement.cs" Line="13" Column="3" />
-      <File FileName="Assets\Scripts\Coins.cs" Line="6" Column="7" />
->>>>>>> origin/Jeremaya
+      <File FileName="Assets\Scripts\CameraMovement.cs" Line="31" Column="1" />
+      <File FileName="Assets\Scripts\Player\MovePlayerObject.cs" Line="46" Column="1" />
+      <File FileName="Assets\Scripts\Player\LeftEnRightButton.cs" Line="34" Column="8" />
+      <File FileName="Assets\Scripts\Player\shooting.cs" Line="13" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
