@@ -25,6 +25,7 @@ public class LeftEnRightButton : MonoBehaviour
 				}
 			}else
 			{
+				GameObject touchObject = Instantiate(Resources.Load("PreFabs/target"),transform.position, Quaternion.identity) as GameObject;
 				MovePlayerObject.shootingBool = true;
 			}
 		}
