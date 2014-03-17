@@ -8,7 +8,13 @@ public class MovePlayerObject : MonoBehaviour
 	public static bool jump = false;
 	public static bool standingOnGround = true;
 	public static bool shootingBool = false;
-	private Vector3 midScreen = new Vector3(Screen.width/2, Screen.height / 8 * 5, 10); 
+	private GameObject newArrow;
+	private Vector3 touchPos;
+	private Vector3 oldArrowRotation;
+	private bool shoooooting = true;
+	private bool rightTouch = false;
+
+	private Vector3 midScreen = new Vector3(Screen.width/2, Screen.height / 2, 10); 
 
 	void Update()
 	{
@@ -43,31 +49,58 @@ public class MovePlayerObject : MonoBehaviour
 	{
 		foreach (Touch touch in Input.touches)
 		{
-			if (Input.touchCount==1)
+			if(touch.position.y > (Screen.height/4))
 			{
-				//Vector3 position = new Vector3(transform.position.x,(transform.position.y + (transform.localScale.y/2)),0);
-				GameObject newArrow = Instantiate(Resources.Load("TileFolder/PreFabs/Arrow"),transform.position, Quaternion.identity) as GameObject;
-				//Vector3 touchPosition = new Vector3(touch.position.x, touch.position.y, 10);
-				Vector3 touchPosition=new Vector3();
+				rightTouch = true;
 
-				if (touch.phase == TouchPhase.Ended)
+				if (Input.touchCount==1)
 				{
-					touchPosition = new Vector3(touch.position.x, touch.position.y, 10);
-					float angleX = touchPosition.x - midScreen.x;
-					float angleY = touchPosition.y - midScreen.y;
-					float angle = Mathf.Atan2(angleX, angleY)* Mathf.Rad2Deg;
-					if(angle <= 0)
+					touchPos = new Vector3(touch.position.x, touch.position.y, transform.position.z);
+					if(shoooooting)
 					{
-						angle += 360;
-					}
-					newArrow.transform.Rotate(0, 0, -angle + 90);
+						newArrow = Instantiate(Resources.Load("TileFolder/PreFabs/Arrow"),transform.position, Quaternion.identity) as GameObject;
+						//newArrow.transform.Rotate(0, 0, newArrow.transform.rotation.z);
+						shoooooting = false;
+					}else if(touch.phase == TouchPhase.Ended)
+					{
+						newArrow.GetComponent<shooting>().moveArrow();
+						shoooooting = true;
+					}//else if(touch.phase == TouchPhase.Moved)
+					//{
+						ArrowRotationUpdate();
+					//}
+
+				}else{
+					//oldArrowRotation.z = 0;
 				}
+			}else{
+				rightTouch = false;
 			}
+			
+			yield return null;
 		}
 
+	}
+	void ArrowRotationUpdate(){
+		if(rightTouch)
+		{
+			float angleX = touchPos.x - midScreen.x;
+			float angleY = touchPos.y - midScreen.y;
+			float angle = Mathf.Atan2(angleX, angleY)* Mathf.Rad2Deg;
 
+			//if(angle <= 0)
+			//{
+			//	angle += 360;
+			//}
+			Debug.Log(angle);
 
-		yield return null;
+			Vector3 newArrowRotation = new Vector3(0, 0, angle);
+			//Vector3 nullRotationVector = new Vector3(0, 0, angle + 90);
+			newArrow.transform.Rotate(0, 0, (oldArrowRotation.z - newArrowRotation.z));
+			oldArrowRotation = newArrowRotation;
+			//newArrow.transform.Rotate(newArrowRotation);
+			newArrow.transform.position = transform.position;
+		}
 	}
 
 	void Deactivate()
@@ -84,12 +117,16 @@ public class MovePlayerObject : MonoBehaviour
 		}
 		if (col.collider.name == "End")
 		{
-			Application.LoadLevel(3);
+			Application.LoadLevel(StaticVariables.lastLevelInt+1);
 		}else if(col.collider.name == "KillingObjects")
 		{
-			Destroy(col.collider.gameObject);
+			//Destroy(col.collider.gameObject);
 			Application.LoadLevel(2);
-		}	
+		}else if(col.collider.name == "Gold")
+		{
+			Destroy(col.collider.gameObject);
+			Debug.Log("jes gold!!");
+		}
 	}
 }
 
