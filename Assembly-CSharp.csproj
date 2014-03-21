@@ -52,10 +52,13 @@
      <Compile Include="Assets\Scripts\ButtonScripts\GoDeadScreen.cs" />
      <Compile Include="Assets\Scripts\ButtonScripts\GoGameScreen.cs" />
      <Compile Include="Assets\Scripts\ButtonScripts\GoLoseScreen.cs" />
+     <Compile Include="Assets\Scripts\ButtonScripts\GoPauseScreen.cs" />
      <Compile Include="Assets\Scripts\ButtonScripts\GoStartScreen.cs" />
+     <Compile Include="Assets\Scripts\ButtonScripts\GoTutorialButton.cs" />
      <Compile Include="Assets\Scripts\ButtonScripts\GoWinScreen.cs" />
      <Compile Include="Assets\Scripts\ButtonScripts\GuiMovementScript.cs" />
      <Compile Include="Assets\Scripts\ButtonScripts\JumpButtonScript.cs" />
+     <Compile Include="Assets\Scripts\ButtonScripts\PauseBackButton.cs" />
      <Compile Include="Assets\Scripts\ButtonScripts\StartButtonScript.cs" />
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\Coins.cs" />

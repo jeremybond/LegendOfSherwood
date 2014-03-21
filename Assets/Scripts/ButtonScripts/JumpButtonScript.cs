@@ -23,7 +23,7 @@ public class JumpButtonScript : MonoBehaviour {
 			{
 				if(MovePlayerObject.standingOnGround)
 				{
-					MovePlayerObject.jump = true;
+					//MovePlayerObject.jump = true;
 				}
 			}
 			if (guiTexture.HitTest(touch.position) && touch.phase != TouchPhase.Ended)
@@ -31,7 +31,7 @@ public class JumpButtonScript : MonoBehaviour {
 				guiTexture.texture = button2;
 				if(MovePlayerObject.standingOnGround)
 				{
-					MovePlayerObject.jump = true;
+					//MovePlayerObject.jump = true;
 				}
 				if(!guiTexture.HitTest(touch.position))
 				{

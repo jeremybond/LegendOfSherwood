@@ -19,6 +19,7 @@ public class ExitScipt : MonoBehaviour {
 			}
 			else if (guiTexture.HitTest(touch.position) && touch.phase == TouchPhase.Ended)
 			{
+				Debug.Log(MovePlayerObject.WonOrPause);
 				guiTexture.texture = button1;
 				Application.Quit();
 			}else if(!guiTexture.HitTest(touch.position))

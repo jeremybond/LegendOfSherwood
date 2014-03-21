@@ -57,8 +57,13 @@ public class GoGameScreen : MonoBehaviour {
 		}
 	}
 
-	void ChooseLevel(){
+	public void NextLevel(){
+		StaticVariables.lastLevelInt += 1;
+		ChooseLevel();
+	}
+	public void ChooseLevel(){
 		StaticVariables.currentLevelInt = StaticVariables.lastLevelInt;
+		GuiMovementScript.won = false;
 		switch(StaticVariables.lastLevelInt){
 			case 1:
 				Application.LoadLevel("Game 1");

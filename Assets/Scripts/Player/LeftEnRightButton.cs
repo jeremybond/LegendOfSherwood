@@ -12,28 +12,29 @@ public class LeftEnRightButton : MonoBehaviour
 	{
 
 		//float move = fSpeed*Time.deltaTime;
-
-		foreach (Touch touch in Input.touches)
+		if(GuiMovementScript.won == false)
 		{
-			if(touch.position.y < (Screen.height/4))
+			foreach (Touch touch in Input.touches)
 			{
-				if (touch.position.x < (Screen.width/2) - (Screen.width / 6))
+				if(touch.position.y < (Screen.height/4))
 				{
-					MovePlayerObject.leftMovement = true;
+					if (touch.position.x < (Screen.width/2) - (Screen.width / 6))
+					{
+						MovePlayerObject.leftMovement = true;
+					}
+					else if (touch.position.x > (Screen.width/2) + (Screen.width / 6)) 
+					{
+						MovePlayerObject.rightMovement = true;
+					}else
+					{
+						GetComponent<MovePlayerObject>().Jump();
+					}
 				}
-				else if (touch.position.x > (Screen.width/2) + (Screen.width / 6)) 
+				else
 				{
-					MovePlayerObject.rightMovement = true;
-				}else
-				{
-					MovePlayerObject.jump = true;
+					MovePlayerObject.shootingBool = true;
 				}
 			}
-			else
-			{
-				MovePlayerObject.shootingBool = true;
-			}
-
 
 		}
 	

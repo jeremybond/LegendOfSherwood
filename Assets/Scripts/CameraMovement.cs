@@ -9,7 +9,7 @@ public class CameraMovement : MonoBehaviour
 
 	void Start()
 	{
-		PosXStraightener = 14f/29f;
+		PosXStraightener = 14f/25.5f;
 	}
 
 	void Update () 
@@ -20,7 +20,7 @@ public class CameraMovement : MonoBehaviour
 			updatePlayerPos();
 			float temperrarilyVariableX = playerPos.x - 1f;
 			float temperrarilyVariableY = playerPos.y - 1f;
-			transform.position = new Vector3((temperrarilyVariableX * PosXStraightener),temperrarilyVariableY / 2.2f,transform.position.z);
+			transform.position = new Vector3((temperrarilyVariableX * PosXStraightener - 1),temperrarilyVariableY / 1.9f,transform.position.z);
 		}
 	}
 	void updatePlayerPos()

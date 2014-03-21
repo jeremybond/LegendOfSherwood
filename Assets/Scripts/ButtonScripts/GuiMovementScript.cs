@@ -11,6 +11,9 @@ public class GuiMovementScript : MonoBehaviour {
 	public static bool won = false;
 	public static bool onStartScreen = false;
 	public static bool inGameScreen = false;
+	public static bool pause = false;	
+	public static bool pauseBack = false;
+
 
 	public void Update(){
 		if(onStartScreen)
@@ -57,22 +60,34 @@ public class GuiMovementScript : MonoBehaviour {
 		}
 		if(inGameScreen)
 		{
-			if(lost)
+
+			if(pause)
 			{
-				if(transform.position.y < 1f)
+				MovePlayerObject.WonOrPause = true;
+				if(transform.position.x < 1f)
 				{
-					transform.position += new Vector3(0, relativeForce, 0);
+					transform.position += new Vector3(relativeForce, 0, 0);
 				}else{
-					lost = false;
+					pause = false;
 					inGameScreen = false;
 				}
 			}else if (won)
 			{
+				MovePlayerObject.WonOrPause = true;
 				if(transform.position.y > -1f)
 				{
 					transform.position -= new Vector3(0, relativeForce, 0);
 				}else{
-					won = false;
+					inGameScreen = false;
+				}
+			}else if(pauseBack)
+			{
+				MovePlayerObject.WonOrPause = false;
+				if(transform.position.x > 0f)
+				{
+					transform.position -= new Vector3(relativeForce, 0, 0);
+				}else{
+					pauseBack = false;
 					inGameScreen = false;
 				}
 			}

@@ -6,49 +6,73 @@ public class shooting : MonoBehaviour
 	private Vector3 midScreen = new Vector3(Screen.width/2, Screen.height / 4 * 2.5f, 10);
 	//private Vector3 touchPosition;
 	public  bool arrowMove = false;
-	public  float fSpeed = 0.5f;
+	public  float fSpeed = 2f;
+	private bool firstTime = true;
+	public static bool hasBinShot = false;
 
 	void Update () 
 	{
-		//transform.Translate(Vector3.forward * move);
+		if(!firstTime)
+		{
+			if(MovePlayerObject.playerYpos < transform.position.y + 0.1f)
+			{
+				collider.isTrigger = true;
+			}else{
+				collider.isTrigger = false;
+			}
+		}
 		foreach (Touch touch in Input.touches)
 		{
-
 			if(!arrowMove)
 			{
-				//touchPosition = new Vector3(touch.position.x, touch.position.y, 10);
 				arrowMove = true;
-				/*float angleX = touchPosition.x - midScreen.x;
-				float angleY = touchPosition.y - midScreen.y;
-				float angle = Mathf.Atan2(angleX, angleY)* Mathf.Rad2Deg;
-				if(angle <= 0)
-				{
-					angle += 360;
-				}
-				transform.Rotate(0, 0, -angle + 90);*/
 			}
 		}
 		if(arrowMove)
 		{
-			transform.Translate(Vector3.right * fSpeed);
+
+			if(firstTime)
+			{
+				transform.Translate(Vector3.right * fSpeed);
+				hasBinShot = false;
+			}else{
+				hasBinShot = true;
+			}
+
 		}
 	}
 
-	public void startMoveArrow(){
-		Debug.Log("startCorou...");
-		StartCoroutine(moveArrow());
-	}
 	public IEnumerator moveArrow()
 	{
-		
-		Debug.Log("movement");
-		float move = fSpeed*Time.deltaTime;
-		if(arrowMove)
+		if(firstTime)
 		{
-			transform.Translate(Vector3.right * move);
+			Debug.Log("movement");
+			float move = fSpeed*Time.deltaTime;
+			if(arrowMove)
+			{
+				transform.Translate(Vector3.right * move);
+			}
 		}
 		yield return new WaitForSeconds(0.05f);
 	}
+	void OnTriggerEnter(Collider col){
+		if(col.transform.tag == "Ground")
+		{
+			//Debug.Log(transform.rotation.z);
+			firstTime = false;
+			arrowMove = false;
+			if(transform.rotation.z > 0.8f){
+				this.transform.rotation = Quaternion.Euler(0, 0, 180);
+			}else if(transform.rotation.z < 0.6f && transform.rotation.z > -0.6f){
+				transform.rotation = Quaternion.Euler(0, 0, 0);
+			}
+		}
+		if(col.transform.tag == "Player")
+		{
 
+		}
+	}
 	
 }
+
+
