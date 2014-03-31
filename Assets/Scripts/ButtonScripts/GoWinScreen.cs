@@ -22,8 +22,7 @@ public class GoWinScreen : MonoBehaviour {
 			else if (guiTexture.HitTest(touch.position) && touch.phase == TouchPhase.Ended)
 			{
 				guiTexture.texture = button1;
-				GuiMovementScript.inGameScreen = true;
-				GuiMovementScript.won = true;
+				guiObject.GetComponent<GuiMovementScript>().StartCoroutine("GoToWinScreen");
 				if(StaticVariables.levelsUnlocked <= StaticVariables.currentLevelInt)
 				{
 					StaticVariables.levelsUnlocked += 1;

@@ -22,8 +22,7 @@ public class GoPauseScreen : MonoBehaviour {
 			else if (guiTexture.HitTest(touch.position) && touch.phase == TouchPhase.Ended)
 			{
 				guiTexture.texture = button1;
-				GuiMovementScript.inGameScreen = true;
-				GuiMovementScript.pause = true;
+				guiObject.GetComponent<GuiMovementScript>().StartCoroutine("FromGameToPause");
 			}else if(!guiTexture.HitTest(touch.position))
 			{
 				guiTexture.texture = button1;

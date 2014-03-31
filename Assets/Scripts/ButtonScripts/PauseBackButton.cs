@@ -22,8 +22,7 @@ public class PauseBackButton : MonoBehaviour {
 			else if (guiTexture.HitTest(touch.position) && touch.phase == TouchPhase.Ended)
 			{
 				guiTexture.texture = button1;
-				GuiMovementScript.inGameScreen = true;
-				GuiMovementScript.pauseBack = true;
+				guiObject.GetComponent<GuiMovementScript>().StartCoroutine("FromPauseToGame");
 			}else if(!guiTexture.HitTest(touch.position))
 			{
 				guiTexture.texture = button1;

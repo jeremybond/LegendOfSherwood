@@ -9,6 +9,7 @@ public class MovePlayerObject : MonoBehaviour
 	public static bool standingOnGround = true;
 	public static bool shootingBool = false;
 	private GameObject newArrow;
+	public GameObject GUIObjectInGame;
 	private Vector3 firstArrowPos;
 	private Vector3 touchPos;
 	private Vector3 oldArrowRotation;
@@ -16,19 +17,20 @@ public class MovePlayerObject : MonoBehaviour
 	public static bool rightTouch = false;
 	public static float playerYpos;
 	public static bool WonOrPause = false;
-	//public GameObject endPoint;
 
 
 	private Vector3 midScreen = new Vector3(Screen.width/2, Screen.height / 2, 10); 
 
 	void Update()
 	{
-		playerYpos = transform.position.y;
+		playerYpos = ((transform.position.y - (transform.localScale.y / 2))*2);
+		Debug.Log(playerYpos);
+
 		if(!WonOrPause)
 		{
 			if(rightMovement)
 			{
-				transform.position += new Vector3(0.08f,0,0);
+				transform.position += new Vector3(0.8f,0,0);
 			}else if(leftMovement)
 			{
 				transform.position += new Vector3(-0.08f,0,0);
@@ -47,15 +49,19 @@ public class MovePlayerObject : MonoBehaviour
 
 	}
 
-	public void Jump(){
+	public IEnumerator Jump(){
 		if(!WonOrPause)
 		{
 			if(standingOnGround)
 			{
 				rigidbody.AddForce(0, 150, 0);
 				standingOnGround = false;
+				yield return new WaitForSeconds(0.5f);
+				standingOnGround = true;
+			
 			}
 		}
+		yield return null;
 	}
 	public IEnumerator  Shoot()
 	{
@@ -108,33 +114,40 @@ public class MovePlayerObject : MonoBehaviour
 	}
 	void OnTriggerEnter(Collider col)
 	{
-		if(col.collider.tag == "Ground")
-		{
-			StartCoroutine(ReadyForJump());
-		}
+
 		if(col.collider.tag == "Arrow")
 		{
+			//Debug.Log(newArrow.transform.collider.isTrigger);
 			StartCoroutine(ReadyForJump());
+			rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
+			StartCoroutine(SetConstraintsToAllButXAndYPos());
+		}
+		if(col.collider.tag == "CoinBag")
+		{
+			Coins.canIDie = true;
+			col.GetComponent<Coins>().Start();
 		}
 	}
+
 	void OnCollisionEnter(Collision col)
 	{
-
+		if(col.collider.tag == "Ground" || col.collider.tag == "Arrow" )
+		{
+			StartCoroutine(ReadyForJump());
+			rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+			StartCoroutine(SetConstraintsToAllButXAndYPos());
+		}
 		if (col.collider.name == "End")
 		{
-			GuiMovementScript.inGameScreen = true;
-			GuiMovementScript.won = true;
+			GUIObjectInGame.GetComponent<GuiMovementScript>().StartCoroutine("GoToWinScreen");
 			if(StaticVariables.levelsUnlocked <= StaticVariables.currentLevelInt)
 			{
 				StaticVariables.levelsUnlocked += 1;
 			}
 		}else if(col.collider.name == "KillingObjects")
 		{
-			//Destroy(col.collider.gameObject);
 			Application.LoadLevel(2);
-		}else if(col.collider.name == "Gold")
-		{
-			Destroy(col.collider.gameObject);
+			AllGUITexts.amountOfGoldBags = 0;
 		}else if(col.collider.name == "NextPartTutorial")
 		{
 			Application.LoadLevel("TutorialPart2");
@@ -143,13 +156,17 @@ public class MovePlayerObject : MonoBehaviour
 			Application.LoadLevel("Start");
 		}
 	}
+	IEnumerator SetConstraintsToAllButXAndYPos(){
+		yield return new WaitForSeconds(0.025f);
+		rigidbody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+	}
 	IEnumerator ReadyForJump(){
 		yield return new WaitForSeconds(0.5f);
 		if(!standingOnGround)
 		{
 			standingOnGround = true;
 		}
-
+		yield return null;
 	}
 }
 

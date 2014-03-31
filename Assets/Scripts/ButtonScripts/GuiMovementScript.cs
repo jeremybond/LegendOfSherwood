@@ -3,94 +3,72 @@ using System.Collections;
 
 public class GuiMovementScript : MonoBehaviour {
 	public static float relativeForce = 0.05f;
-	public static bool levels = false;
-	public static bool backToMenuFromLevels = false;
-	public static bool backToMenuFromCredits = false;
-	public static bool credits = false;
-	public static bool lost = false;
-	public static bool won = false;
-	public static bool onStartScreen = false;
-	public static bool inGameScreen = false;
-	public static bool pause = false;	
-	public static bool pauseBack = false;
 
-
-	public void Update(){
-		if(onStartScreen)
-		{
-			if(backToMenuFromLevels)
-			{
-				if(transform.position.x < 0f)
-				{
-					transform.position += new Vector3(relativeForce, 0, 0);
-				}else{
-					backToMenuFromLevels = false;
-					onStartScreen = false;
-				}
-			}else if(backToMenuFromCredits)
-			{
-				if(transform.position.x > 0f)
-				{
-					transform.position -= new Vector3(relativeForce, 0, 0);
-				}
-				else{
-					backToMenuFromCredits = false;
-					onStartScreen = false;
-				}
-			}else if(levels)
-			{
-				if(transform.position.x > -1f)
-				{
-					transform.position -= new Vector3(relativeForce, 0, 0);
-				}else{
-					levels = false;
-					onStartScreen = false;
-				}
-			}else if(credits)
-			{
-				if(transform.position.x < 1f)
-				{
-					transform.position += new Vector3(relativeForce, 0, 0);
-				}else{
-					credits = false;
-					onStartScreen = false;
-				}
-			}
-
+	void Start(){
+		MovePlayerObject.WonOrPause = false;
+	}
+	//////////////////////////////////////////////////IEnumerators for out of the game
+	public IEnumerator BackToMenuFromLevels(){///////////To menu from level select
+		if(transform.position.x < 0f){
+			transform.position += new Vector3(relativeForce, 0, 0);
+			yield return new WaitForSeconds(0.02f);
+			StartCoroutine(BackToMenuFromLevels());
 		}
-		if(inGameScreen)
-		{
-
-			if(pause)
-			{
-				MovePlayerObject.WonOrPause = true;
-				if(transform.position.x < 1f)
-				{
-					transform.position += new Vector3(relativeForce, 0, 0);
-				}else{
-					pause = false;
-					inGameScreen = false;
-				}
-			}else if (won)
-			{
-				MovePlayerObject.WonOrPause = true;
-				if(transform.position.y > -1f)
-				{
-					transform.position -= new Vector3(0, relativeForce, 0);
-				}else{
-					inGameScreen = false;
-				}
-			}else if(pauseBack)
-			{
-				MovePlayerObject.WonOrPause = false;
-				if(transform.position.x > 0f)
-				{
-					transform.position -= new Vector3(relativeForce, 0, 0);
-				}else{
-					pauseBack = false;
-					inGameScreen = false;
-				}
-			}
+		yield return new WaitForSeconds(0.1f);
+	}
+	public IEnumerator BackToMenuFromCredits(){///////////To menu from credits
+		if(transform.position.x > 0f){
+			transform.position -= new Vector3(relativeForce, 0, 0);
+			yield return new WaitForSeconds(0.02f);
+			StartCoroutine(BackToMenuFromCredits());
 		}
+		yield return new WaitForSeconds(0.1f);
+	}
+	public IEnumerator ToLevelsFromMenu(){///////////To levels select from menu
+		if(transform.position.x > -1f){
+			transform.position -= new Vector3(relativeForce, 0, 0);
+			yield return new WaitForSeconds(0.02f);
+			StartCoroutine(ToLevelsFromMenu());
+		}
+		yield return new WaitForSeconds(0.1f);
+	}
+	public IEnumerator GoToCreditsScreen(){///////////To credits from menu
+		if(transform.position.x < 1f){
+			transform.position += new Vector3(relativeForce, 0, 0);
+			yield return new WaitForSeconds(0.02f);
+			StartCoroutine(GoToCreditsScreen());
+		}
+		yield return new WaitForSeconds(0.1f);
+	}
+
+	//////////////////////////////////////////////////IEnumerators for in the game
+	public IEnumerator FromGameToPause(){/////////////pushing the pause button
+		MovePlayerObject.WonOrPause = true;
+		if(transform.position.x < 1f){
+			transform.position += new Vector3(relativeForce, 0, 0);
+			yield return new WaitForSeconds(0.02f);
+			StartCoroutine(FromGameToPause());
+		}
+		yield return new WaitForSeconds(0.1f);
+	}
+
+	public IEnumerator FromPauseToGame(){////////////Pushing the continue button
+		MovePlayerObject.WonOrPause = false;
+		if(transform.position.x > 0f){
+			transform.position -= new Vector3(relativeForce, 0, 0);
+			yield return new WaitForSeconds(0.02f);
+			StartCoroutine(FromPauseToGame());
+		}
+		yield return new WaitForSeconds(0.1f);
+	}
+	public IEnumerator GoToWinScreen(){//////////////Winning the game
+		MovePlayerObject.WonOrPause = true;
+		if(transform.position.x > -1f){
+			Debug.Log(transform.position.y);
+			transform.position -= new Vector3(relativeForce, 0, 0);
+			yield return new WaitForSeconds(0.02f);
+			StartCoroutine(GoToWinScreen());
+		}
+		yield return new WaitForSeconds(0.1f);
 	}
 }

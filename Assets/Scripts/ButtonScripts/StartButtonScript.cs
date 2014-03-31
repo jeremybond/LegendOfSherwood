@@ -22,8 +22,7 @@ public class StartButtonScript : MonoBehaviour {
 			else if (guiTexture.HitTest(touch.position) && touch.phase == TouchPhase.Ended)
 			{
 				guiTexture.texture = button1;
-				GuiMovementScript.onStartScreen = true;
-				GuiMovementScript.levels = true;
+				guiObject.GetComponent<GuiMovementScript>().StartCoroutine("ToLevelsFromMenu");
 			}else if(!guiTexture.HitTest(touch.position))
 			{
 				guiTexture.texture = button1;

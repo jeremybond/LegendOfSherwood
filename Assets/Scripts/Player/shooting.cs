@@ -12,9 +12,10 @@ public class shooting : MonoBehaviour
 
 	void Update () 
 	{
+		Debug.Log(transform.position.y);
 		if(!firstTime)
 		{
-			if(MovePlayerObject.playerYpos < transform.position.y + 0.1f)
+			if(((transform.position.y + (transform.localScale.y/2)) * 2) > MovePlayerObject.playerYpos)
 			{
 				collider.isTrigger = true;
 			}else{
@@ -71,8 +72,12 @@ public class shooting : MonoBehaviour
 		{
 
 		}
+		if(col.transform.tag == "Rope")
+		{
+			Destroy(col.gameObject);
+		}
 	}
-	
+
 }
 
 

@@ -12,7 +12,7 @@ public class LeftEnRightButton : MonoBehaviour
 	{
 
 		//float move = fSpeed*Time.deltaTime;
-		if(GuiMovementScript.won == false)
+		if(!MovePlayerObject.WonOrPause)
 		{
 			foreach (Touch touch in Input.touches)
 			{
@@ -27,7 +27,7 @@ public class LeftEnRightButton : MonoBehaviour
 						MovePlayerObject.rightMovement = true;
 					}else
 					{
-						GetComponent<MovePlayerObject>().Jump();
+						GetComponent<MovePlayerObject>().StartCoroutine("Jump");
 					}
 				}
 				else
@@ -37,6 +37,5 @@ public class LeftEnRightButton : MonoBehaviour
 			}
 
 		}
-	
 	}
 }

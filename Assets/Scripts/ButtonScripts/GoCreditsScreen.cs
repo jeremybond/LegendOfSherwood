@@ -6,7 +6,7 @@ public class GoCreditsScreen : MonoBehaviour {
 	public Texture2D button1;
 	public Texture2D button2;
 	public GameObject guiObject;
-	
+	//private GameObject guiObject;
 	void Start () 
 	{
 		guiTexture.texture = button1;	
@@ -22,8 +22,7 @@ public class GoCreditsScreen : MonoBehaviour {
 			else if (guiTexture.HitTest(touch.position) && touch.phase == TouchPhase.Ended)
 			{
 				guiTexture.texture = button1;
-				GuiMovementScript.onStartScreen = true;
-				GuiMovementScript.credits = true;
+				guiObject.GetComponent<GuiMovementScript>().StartCoroutine("GoToCreditsScreen");
 			}else if(!guiTexture.HitTest(touch.position))
 			{
 				guiTexture.texture = button1;
