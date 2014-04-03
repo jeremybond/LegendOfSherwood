@@ -3,13 +3,10 @@ using System.Collections;
 
 public class Coins : MonoBehaviour 
 {
-	public static bool canIDie = false;
-	public void Start()
+	public void CollectMoney()
 	{	
-		if(canIDie)
-		{
-			Destroy(this.gameObject);
-			AllGUITexts.amountOfGoldBags += 1;
-		}
+		Destroy(this.gameObject);
+		Debug.Log(this.gameObject);
+		AllGUITexts.amountOfGoldBags += 1;
 	}
 }

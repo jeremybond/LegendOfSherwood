@@ -14,6 +14,7 @@ public class GoGameScreen : MonoBehaviour {
 
 	void Start()
 	{
+		PlayerPrefs.GetInt("Level", StaticVariables.levelsUnlocked);
 		if(!retry)
 		{
 			guiTexture.texture = button3;
@@ -61,10 +62,14 @@ public class GoGameScreen : MonoBehaviour {
 	public void NextLevel(){
 		StaticVariables.lastLevelInt += 1;
 		ChooseLevel();
+		PlayerPrefs.SetInt("Level", StaticVariables.lastLevelInt);
+	}
+	public void Restart(){
+		Application.LoadLevel(StaticVariables.currentLevelInt);
 	}
 	public void ChooseLevel(){
 		MovePlayerObject.WonOrPause = false;
-		Debug.Log(MovePlayerObject.WonOrPause);
+		//Debug.Log(MovePlayerObject.WonOrPause);
 		StaticVariables.currentLevelInt = StaticVariables.lastLevelInt;
 		switch(StaticVariables.lastLevelInt){
 			case 1:

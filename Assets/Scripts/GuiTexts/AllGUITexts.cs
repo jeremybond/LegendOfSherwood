@@ -29,7 +29,7 @@ public class AllGUITexts : MonoBehaviour {
 	void Update () {
 		if(coinBagsBool)
 		{
-			coinBags.text = amountOfGoldBags + "/" + totalAmountOfCoinBags;
+			coinBags.text = amountOfGoldBags + "/" + totalAmountOfCoinBags + "                        Level: " + StaticVariables.currentLevelInt;
 		}
 	}
 }

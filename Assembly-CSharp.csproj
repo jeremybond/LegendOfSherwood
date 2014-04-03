@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\BlackScreenScript.cs" />
+     <Compile Include="Assets\Scripts\Bridge.cs" />
      <Compile Include="Assets\Scripts\ButtonScripts\BackButtonScript.cs" />
      <Compile Include="Assets\Scripts\ButtonScripts\ExitScipt.cs" />
      <Compile Include="Assets\Scripts\ButtonScripts\GoCreditsScreen.cs" />
@@ -67,6 +68,7 @@
      <Compile Include="Assets\Scripts\Player\LeftEnRightButton.cs" />
      <Compile Include="Assets\Scripts\Player\MovePlayerObject.cs" />
      <Compile Include="Assets\Scripts\Player\shooting.cs" />
+     <Compile Include="Assets\Scripts\RopeController.cs" />
      <Compile Include="Assets\Scripts\StaticVariables.cs" />
      <Compile Include="Assets\Scripts\Tilemap\Levels.cs" />
      <Compile Include="Assets\Scripts\Tilemap\TileScript.cs" />

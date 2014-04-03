@@ -17,22 +17,109 @@ public class MovePlayerObject : MonoBehaviour
 	public static bool rightTouch = false;
 	public static float playerYpos;
 	public static bool WonOrPause = false;
-
-
+	private bool hitWallsNextToYou = false;
 	private Vector3 midScreen = new Vector3(Screen.width/2, Screen.height / 2, 10); 
+
+
+	//RayCastShit
+	public float raycastHeight;
+	public bool raycastJumpBool;
+
+	//Audio
+	public AudioClip endSound;
+	public AudioClip coinSound;
+	
+	//public AudioClip themeSong;
+	
+	public AudioClip walkingSound;
+	public AudioClip jumpSound;
+	public AudioClip arrowHitSound;
 
 	void Update()
 	{
-		playerYpos = ((transform.position.y - (transform.localScale.y / 2))*2);
-		Debug.Log(playerYpos);
+		playerYpos = ((transform.position.y - (transform.localScale.y / 2)));//+0.5f);
+		//Debug.Log(playerYpos);
+		//here the raycast for the jump get made, directed and shot
+		RaycastHit hit;
+		float changedLocalScaleX = ((transform.localScale.x / 7) * 3);
+		float changedLocalScaleY = ((transform.localScale.y / 7) * 3);
+		//Setting the position of the left raycast
+		Vector3 lowerPlayerPos1 = transform.position;
+		lowerPlayerPos1.x -= changedLocalScaleX;
+		lowerPlayerPos1.y -= changedLocalScaleY;
+		//Setting the position of the right raycast
+		Vector3 lowerPlayerPos2 = transform.position;
+		lowerPlayerPos2.x += changedLocalScaleX;
+		lowerPlayerPos2.y = lowerPlayerPos1.y;
+		//Setting the position of the middle raycast
+		Vector3 lowerPlayerPos3 = transform.position;
+		lowerPlayerPos3.y = lowerPlayerPos1.y;
+		//giving the raycast the position the direction en the lenght
+		Ray landingRay1 = new Ray(lowerPlayerPos1, Vector3.down * raycastHeight);
+		Ray landingRay2 = new Ray(lowerPlayerPos2, Vector3.down * raycastHeight);
+		Ray landingRay3 = new Ray(lowerPlayerPos3, Vector3.down * raycastHeight);
+		
+		//Debug.DrawRay(lowerPlayerPos1, Vector3.down * raycastHeight);
+		//Debug.DrawRay(lowerPlayerPos2, Vector3.down * raycastHeight);
+		//Debug.DrawRay(lowerPlayerPos3, Vector3.down * raycastHeight);
+		if(!raycastJumpBool)
+		{
+		
+			if(Physics.Raycast(landingRay1, out hit, raycastHeight))
+			{
+				//Debug.DrawRay(lowerPlayerPos1, Vector3.down * raycastHeight);
+				//Debug.DrawRay(lowerPlayerPos2, Vector3.down * raycastHeight);
+				//Debug.DrawRay(lowerPlayerPos3, Vector3.down * raycastHeight);
+				//Debug.Log(hit.collider.tag);
+				if(hit.collider.tag == "Ground")
+				{
+					StartCoroutine(ReadyForJump());
+					Debug.Log(raycastJumpBool + "11");
+				}else if(hit.collider.tag == "Arrow")
+				{
+					Debug.Log(raycastJumpBool + "12");
+					hit.collider.isTrigger = false;
+					StartCoroutine(ReadyForJump());
+				}
+			}
+			if(Physics.Raycast(landingRay2, out hit, raycastHeight))
+			{
+				//Debug.Log(hit.collider.tag);
+				if(hit.collider.tag == "Ground")
+				{
+					StartCoroutine(ReadyForJump());
+				}else if(hit.collider.tag == "Arrow")
+				{
+					//hit.collider.isTrigger = false;
+					StartCoroutine(ReadyForJump());
+				}
+				Debug.Log(raycastJumpBool + "2");
+			}
+			if(Physics.Raycast(landingRay3, out hit, raycastHeight))
+			{
+				//Debug.Log(hit.collider.tag);
+				if(hit.collider.tag == "Ground")
+				{
+					StartCoroutine(ReadyForJump());
+				}else if(hit.collider.tag == "Arrow")
+				{
+					hit.collider.isTrigger = false;
+					StartCoroutine(ReadyForJump());
+				}
+				Debug.Log(raycastJumpBool + "3");
+			}
+		}
+
 
 		if(!WonOrPause)
 		{
 			if(rightMovement)
-			{
-				transform.position += new Vector3(0.8f,0,0);
+			{    
+				audio.PlayOneShot(walkingSound);
+				transform.position += new Vector3(0.08f,0,0);
 			}else if(leftMovement)
 			{
+				audio.PlayOneShot(walkingSound);
 				transform.position += new Vector3(-0.08f,0,0);
 			}
 			Deactivate();
@@ -52,13 +139,14 @@ public class MovePlayerObject : MonoBehaviour
 	public IEnumerator Jump(){
 		if(!WonOrPause)
 		{
-			if(standingOnGround)
-			{
-				rigidbody.AddForce(0, 150, 0);
-				standingOnGround = false;
-				yield return new WaitForSeconds(0.5f);
-				standingOnGround = true;
-			
+			if(raycastJumpBool)
+			{    
+				audio.PlayOneShot(jumpSound);
+				//Debug.Log(Time.deltaTime);
+				raycastJumpBool = false;
+				//rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+				rigidbody.AddRelativeForce(0, 150, 0);
+				//rigidbody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 			}
 		}
 		yield return null;
@@ -76,7 +164,7 @@ public class MovePlayerObject : MonoBehaviour
 					touchPos = new Vector3(touch.position.x, touch.position.y, transform.position.z);
 					if(shoooooting)
 					{
-						newArrow = Instantiate(Resources.Load("TileFolder/PreFabs/Arrow"),new Vector3(transform.position.x + 0.8f,transform.position.y,transform.position.z), Quaternion.identity) as GameObject;
+						newArrow = Instantiate(Resources.Load("TileFolder/PreFabs/Arrow"),new Vector3(transform.position.x + 0.8f,transform.position.y,transform.position.z + 0.2f), Quaternion.identity) as GameObject;
 						newArrow.collider.enabled = false;
 						shoooooting = false;
 					}else if(touch.phase == TouchPhase.Ended)
@@ -118,27 +206,36 @@ public class MovePlayerObject : MonoBehaviour
 		if(col.collider.tag == "Arrow")
 		{
 			//Debug.Log(newArrow.transform.collider.isTrigger);
-			StartCoroutine(ReadyForJump());
+			//StartCoroutine(ReadyForJump());
+			col.collider.isTrigger = false;
 			rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
 			StartCoroutine(SetConstraintsToAllButXAndYPos());
 		}
 		if(col.collider.tag == "CoinBag")
-		{
-			Coins.canIDie = true;
-			col.GetComponent<Coins>().Start();
+		{   
+			audio.PlayOneShot(coinSound);
+			col.GetComponent<Coins>().CollectMoney();
 		}
 	}
 
 	void OnCollisionEnter(Collision col)
 	{
-		if(col.collider.tag == "Ground" || col.collider.tag == "Arrow" )
+		if(col.collider.tag == "Ground" )
 		{
-			StartCoroutine(ReadyForJump());
+			//StartCoroutine(ReadyForJump());
 			rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 			StartCoroutine(SetConstraintsToAllButXAndYPos());
 		}
-		if (col.collider.name == "End")
+		if(col.collider.tag == "Arrow" )
 		{
+			//StartCoroutine(ReadyForJump());
+			//col.collider.isTrigger = false;
+			rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
+			StartCoroutine(SetConstraintsToAllButXAndYPos());
+		}
+		if (col.collider.name == "End")
+		{   
+			audio.PlayOneShot(endSound);
 			GUIObjectInGame.GetComponent<GuiMovementScript>().StartCoroutine("GoToWinScreen");
 			if(StaticVariables.levelsUnlocked <= StaticVariables.currentLevelInt)
 			{
@@ -146,7 +243,7 @@ public class MovePlayerObject : MonoBehaviour
 			}
 		}else if(col.collider.name == "KillingObjects")
 		{
-			Application.LoadLevel(2);
+			Application.LoadLevel(Application.loadedLevel);
 			AllGUITexts.amountOfGoldBags = 0;
 		}else if(col.collider.name == "NextPartTutorial")
 		{
@@ -161,10 +258,10 @@ public class MovePlayerObject : MonoBehaviour
 		rigidbody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 	}
 	IEnumerator ReadyForJump(){
-		yield return new WaitForSeconds(0.5f);
-		if(!standingOnGround)
+		//yield return new WaitForSeconds(0.5f);
+		if(!raycastJumpBool)
 		{
-			standingOnGround = true;
+			raycastJumpBool = true;
 		}
 		yield return null;
 	}

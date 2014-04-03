@@ -64,7 +64,7 @@ public class GuiMovementScript : MonoBehaviour {
 	public IEnumerator GoToWinScreen(){//////////////Winning the game
 		MovePlayerObject.WonOrPause = true;
 		if(transform.position.x > -1f){
-			Debug.Log(transform.position.y);
+			//Debug.Log(transform.position.y);
 			transform.position -= new Vector3(relativeForce, 0, 0);
 			yield return new WaitForSeconds(0.02f);
 			StartCoroutine(GoToWinScreen());
