@@ -59,9 +59,9 @@ public class MovePlayerObject : MonoBehaviour
 		Ray landingRay2 = new Ray(lowerPlayerPos2, Vector3.down * raycastHeight);
 		Ray landingRay3 = new Ray(lowerPlayerPos3, Vector3.down * raycastHeight);
 		
-		//Debug.DrawRay(lowerPlayerPos1, Vector3.down * raycastHeight);
-		//Debug.DrawRay(lowerPlayerPos2, Vector3.down * raycastHeight);
-		//Debug.DrawRay(lowerPlayerPos3, Vector3.down * raycastHeight);
+		Debug.DrawRay(lowerPlayerPos1, Vector3.down * raycastHeight);
+		Debug.DrawRay(lowerPlayerPos2, Vector3.down * raycastHeight);
+		Debug.DrawRay(lowerPlayerPos3, Vector3.down * raycastHeight);
 		if(!raycastJumpBool)
 		{
 		
@@ -70,7 +70,7 @@ public class MovePlayerObject : MonoBehaviour
 				//Debug.DrawRay(lowerPlayerPos1, Vector3.down * raycastHeight);
 				//Debug.DrawRay(lowerPlayerPos2, Vector3.down * raycastHeight);
 				//Debug.DrawRay(lowerPlayerPos3, Vector3.down * raycastHeight);
-				//Debug.Log(hit.collider.tag);
+				Debug.Log(hit.collider.tag);
 				if(hit.collider.tag == "Ground")
 				{
 					StartCoroutine(ReadyForJump());
@@ -145,7 +145,7 @@ public class MovePlayerObject : MonoBehaviour
 				//Debug.Log(Time.deltaTime);
 				raycastJumpBool = false;
 				//rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-				rigidbody.AddRelativeForce(0, 150, 0);
+				rigidbody.AddRelativeForce(0, 300, 0);
 				//rigidbody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 			}
 		}
@@ -258,12 +258,12 @@ public class MovePlayerObject : MonoBehaviour
 		rigidbody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 	}
 	IEnumerator ReadyForJump(){
-		//yield return new WaitForSeconds(0.5f);
 		if(!raycastJumpBool)
 		{
 			raycastJumpBool = true;
 		}
-		yield return null;
+		yield return new WaitForSeconds(0.1f);
+		//yield return null;
 	}
 }
 
