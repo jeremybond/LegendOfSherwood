@@ -5,7 +5,7 @@ public class shooting : MonoBehaviour
 {
 	private Vector3 midScreen = new Vector3(Screen.width/2, Screen.height / 4 * 2.5f, 10);
 	//private Vector3 touchPosition;
-	public  bool arrowMove = false;
+	public static  bool arrowMove = false;
 	public  float fSpeed = 0.1f;
 	private bool firstTime = true;
 	public static bool hasBinShot = false;

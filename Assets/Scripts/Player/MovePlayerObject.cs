@@ -23,7 +23,7 @@ public class MovePlayerObject : MonoBehaviour
 
 	//RayCastShit
 	public float raycastHeight;
-	public bool raycastJumpBool;
+	public static bool raycastJumpBool;
 
 	//Audio
 	public AudioClip endSound;
@@ -74,11 +74,13 @@ public class MovePlayerObject : MonoBehaviour
 				if(hit.collider.tag == "Ground")
 				{
 					StartCoroutine(ReadyForJump());
-					Debug.Log(raycastJumpBool + "11");
+					//Debug.Log(raycastJumpBool + "11");
+					LeftEnRightButton.jumped = false;
 				}else if(hit.collider.tag == "Arrow")
 				{
-					Debug.Log(raycastJumpBool + "12");
+					//Debug.Log(raycastJumpBool + "12");
 					hit.collider.isTrigger = false;
+					LeftEnRightButton.jumped = false;
 					StartCoroutine(ReadyForJump());
 				}
 			}
@@ -87,26 +89,30 @@ public class MovePlayerObject : MonoBehaviour
 				//Debug.Log(hit.collider.tag);
 				if(hit.collider.tag == "Ground")
 				{
+					LeftEnRightButton.jumped = false;
 					StartCoroutine(ReadyForJump());
 				}else if(hit.collider.tag == "Arrow")
 				{
-					//hit.collider.isTrigger = false;
+					hit.collider.isTrigger = false;
+					LeftEnRightButton.jumped = false;
 					StartCoroutine(ReadyForJump());
 				}
-				Debug.Log(raycastJumpBool + "2");
+				//Debug.Log(raycastJumpBool + "2");
 			}
 			if(Physics.Raycast(landingRay3, out hit, raycastHeight))
 			{
 				//Debug.Log(hit.collider.tag);
+				LeftEnRightButton.jumped = false;
 				if(hit.collider.tag == "Ground")
 				{
 					StartCoroutine(ReadyForJump());
 				}else if(hit.collider.tag == "Arrow")
 				{
+					LeftEnRightButton.jumped = false;
 					hit.collider.isTrigger = false;
 					StartCoroutine(ReadyForJump());
 				}
-				Debug.Log(raycastJumpBool + "3");
+				//Debug.Log(raycastJumpBool + "3");
 			}
 		}
 
@@ -115,10 +121,12 @@ public class MovePlayerObject : MonoBehaviour
 		{
 			if(rightMovement)
 			{    
+				ChangeToRightSide();
 				audio.PlayOneShot(walkingSound);
 				transform.position += new Vector3(0.08f,0,0);
 			}else if(leftMovement)
 			{
+				ChangeToLeftSide();
 				audio.PlayOneShot(walkingSound);
 				transform.position += new Vector3(-0.08f,0,0);
 			}
@@ -134,6 +142,18 @@ public class MovePlayerObject : MonoBehaviour
 		}
 
 
+	}
+	public void ChangeToLeftSide(){
+		if(transform.localScale.x > 0)
+		{
+			transform.localScale -= new Vector3(1.25f,0,0);
+		}
+	}
+	public void ChangeToRightSide(){
+		if(transform.localScale.x < 0)
+		{
+			transform.localScale += new Vector3(1.25f,0,0);
+		}
 	}
 
 	public IEnumerator Jump(){
@@ -258,12 +278,11 @@ public class MovePlayerObject : MonoBehaviour
 		rigidbody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 	}
 	IEnumerator ReadyForJump(){
-		//yield return new WaitForSeconds(0.5f);
 		if(!raycastJumpBool)
 		{
 			raycastJumpBool = true;
 		}
-		yield return null;
+		yield return new WaitForSeconds(0.1f);
 	}
 }
 
